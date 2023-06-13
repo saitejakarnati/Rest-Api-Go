@@ -47,11 +47,6 @@ func getAllStudents(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(students)
 }
 
-func testPostStudents(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Test POST endpoint worked")
-
-}
-
 func getOneStudent(w http.ResponseWriter, r *http.Request) {
 	studentRollno := mux.Vars(r)["rollno"]
 
@@ -102,7 +97,6 @@ func handleRequests() {
 	myRouter := mux.NewRouter().StrictSlash(true)
 	myRouter.HandleFunc("/", homePage)
 	myRouter.HandleFunc("/students", getAllStudents).Methods("GET")
-	myRouter.HandleFunc("/students", testPostStudents).Methods("POST")
 	myRouter.HandleFunc("/students/{rollno}", getOneStudent).Methods("GET")
 	myRouter.HandleFunc("/students/{rollno}", updateStudent).Methods("PATCH")
 	myRouter.HandleFunc("/students", createNewStudent).Methods("POST")
